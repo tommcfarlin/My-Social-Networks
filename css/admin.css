@@ -1,0 +1,3 @@
+.wrapper fieldset { border: 1px solid #ddd; width: 90%; padding: 5%; }
+.option { margin: 12px 0 12px 0; }
+.option input { width: 100%; }
