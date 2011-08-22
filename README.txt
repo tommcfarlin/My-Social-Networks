@@ -3,7 +3,7 @@ Contributors: tommcfarlin
 Tags: twitter, facebook, social
 Requires at least: 3.2
 Tested up to: 3.2
-Stable tag: 1.0
+Stable tag: 1.1
 
 A simple WordPress widget for sharing a few of your social networks.
 
@@ -21,6 +21,10 @@ It was also used in the WpTuts article <a href="javascript:;">Writing Maintainab
 4. Drop the widget on your side and continue!
 
 == Changelog ==
+
+= 1.1 =
+* Updating constant references
+* Changes the order in which localization definitions are loaded
 
 = 1.0 =
 * Initial release

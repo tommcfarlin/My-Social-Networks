@@ -3,7 +3,7 @@
 Plugin Name: My Social Network
 Plugin URI: http://github.com/tommcfarlin/My-Social-Network
 Description: A simple WordPress widget for sharing a few of your social networks.
-Version: 1.0
+Version: 1.1
 Author: Tom McFarlin
 Author URI: http://tommcfarlin.com
 Author Email: tom@tommcfarlin.com
@@ -28,6 +28,10 @@ License:
 
 class My_Social_Network extends WP_Widget {
 
+	const name = 'My Social Networks';
+	const locale = 'my-social-networks-locale';
+	const slug = 'My-Social-Networks';
+	
 	/*--------------------------------------------------*/
 	/* Constructor
 	/*--------------------------------------------------*/
@@ -39,19 +43,17 @@ class My_Social_Network extends WP_Widget {
 	 */
 	function My_Social_Network() {
 
-    // Define constants used throughout the plugin
-    $this->init_plugin_constants();
-  
+		load_plugin_textdomain(self::locale, false, dirname(plugin_basename( __FILE__ ) ) . '/lang/' );
+
 		$widget_opts = array (
-			'classname' => PLUGIN_NAME, 
-			'description' => __('A simple WordPress widget for sharing a few of your social networks.', PLUGIN_LOCALE)
+			'classname' => self::name, 
+			'description' => __('A simple WordPress widget for sharing a few of your social networks.', self::locale)
 		);	
 		
-		$this->WP_Widget(PLUGIN_SLUG, __(PLUGIN_NAME, PLUGIN_LOCALE), $widget_opts);
-		load_plugin_textdomain(PLUGIN_LOCALE, false, dirname(plugin_basename( __FILE__ ) ) . '/lang/' );
-		
-    // Load JavaScript and stylesheets
-    $this->register_scripts_and_styles();
+		$this->WP_Widget(self::slug, __(self::name, self::locale), $widget_opts);
+
+    	// Load JavaScript and stylesheets
+    	$this->register_scripts_and_styles();
 		
 	} // end constructor
 
@@ -71,12 +73,12 @@ class My_Social_Network extends WP_Widget {
 		
 		echo $before_widget;
 		
-    $twitter_username = empty($instance['twitter_username']) ? '' : apply_filters('twitter_username', $instance['twitter_username']);
+    	$twitter_username = empty($instance['twitter_username']) ? '' : apply_filters('twitter_username', $instance['twitter_username']);
 		$facebook_username = empty($instance['facebook_username']) ? '' : apply_filters('facebook_username', $instance['facebook_username']);
 		$google_plus_id = empty($instance['google_plus_id']) ? '' : apply_filters('google_plus_id', $instance['google_plus_id']);
     
 		// Display the widget
-		include(WP_PLUGIN_DIR . '/' . PLUGIN_SLUG . '/views/widget.php');
+		include(WP_PLUGIN_DIR . '/' . self::slug . '/views/widget.php');
 		
 		echo $after_widget;
 		
@@ -92,10 +94,10 @@ class My_Social_Network extends WP_Widget {
 		
 		$instance = $old_instance;
 		
-    $instance['twitter_username'] = strip_tags(stripslashes($new_instance['twitter_username']));
-    $instance['facebook_username'] = strip_tags(stripslashes($new_instance['facebook_username']));
-    $instance['google_plus_id'] = strip_tags(stripslashes($new_instance['google_plus_id']));
-    
+	    $instance['twitter_username'] = strip_tags(stripslashes($new_instance['twitter_username']));
+	    $instance['facebook_username'] = strip_tags(stripslashes($new_instance['facebook_username']));
+	    $instance['google_plus_id'] = strip_tags(stripslashes($new_instance['google_plus_id']));
+	    
 		return $instance;
 		
 	} // end widget
@@ -111,17 +113,17 @@ class My_Social_Network extends WP_Widget {
 			(array)$instance,
 			array(
 				'twitter_username' => '',
-        'facebook_username' => '',
-        'google_plus_id' => ''
+        		'facebook_username' => '',
+        		'google_plus_id' => ''
 			)
 		);
     
-    $twitter_username = strip_tags(stripslashes($new_instance['twitter_username']));
-    $facebook_username = strip_tags(stripslashes($new_instance['facebook_username']));
-    $google_plus_id = strip_tags(stripslashes($new_instance['google_plus_id']));
+    	$twitter_username = strip_tags(stripslashes($new_instance['twitter_username']));
+    	$facebook_username = strip_tags(stripslashes($new_instance['facebook_username']));
+    	$google_plus_id = strip_tags(stripslashes($new_instance['google_plus_id']));
 
 		// Display the admin form
-    include(WP_PLUGIN_DIR . '/' . PLUGIN_SLUG . '/views/admin.php');
+    	include(WP_PLUGIN_DIR . '/' . self::slug . '/views/admin.php');
 		
 	} // end form
 	
@@ -129,37 +131,17 @@ class My_Social_Network extends WP_Widget {
 	/* Private Functions
 	/*--------------------------------------------------*/
 	
-  /**
-   * Initializes constants used for convenience throughout 
-   * the plugin.
-   */
-  private function init_plugin_constants() {
-
-    if(!defined('PLUGIN_LOCALE')) {
-      define('PLUGIN_LOCALE', 'my-social-network-locale');
-    } // end if
-
-    if(!defined('PLUGIN_NAME')) {
-      define('PLUGIN_NAME', 'My Social Networks');
-    } // end if
-
-    if(!defined('PLUGIN_SLUG')) {
-      define('PLUGIN_SLUG', 'My-Social-Networks');
-    } // end if
-  
-  } // end init_plugin_constants
-  
 	/**
 	 * Registers and enqueues stylesheets for the administration panel and the
 	 * public facing site.
 	 */
 	private function register_scripts_and_styles() {
 		if(is_admin()) {
-      $this->load_file(PLUGIN_NAME, '/' . PLUGIN_SLUG . '/js/admin.js', true);
-			$this->load_file(PLUGIN_NAME, '/' . PLUGIN_SLUG . '/css/admin.css');
+      		$this->load_file(PLUGIN_NAME, '/' . self::slug . '/js/admin.js', true);
+			$this->load_file(PLUGIN_NAME, '/' . self::slug . '/css/admin.css');
 		} else { 
-      $this->load_file(PLUGIN_NAME, '/' . PLUGIN_SLUG . '/js/admin.css', true);
-			$this->load_file(PLUGIN_NAME, '/' . PLUGIN_SLUG . '/css/widget.css');
+      		$this->load_file(PLUGIN_NAME, '/' . self::slug . '/js/admin.css', true);
+			$this->load_file(PLUGIN_NAME, '/' . self::slug . '/css/widget.css');
 		} // end if/else
 	} // end register_scripts_and_styles
 
@@ -172,7 +154,7 @@ class My_Social_Network extends WP_Widget {
 	 */
 	private function load_file($name, $file_path, $is_script = false) {
 		
-    $url = WP_PLUGIN_URL . $file_path;
+    	$url = WP_PLUGIN_URL . $file_path;
 		$file = WP_PLUGIN_DIR . $file_path;
     
 		if(file_exists($file)) {
