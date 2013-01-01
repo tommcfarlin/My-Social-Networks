@@ -30,7 +30,7 @@ class My_Social_Network extends WP_Widget {
 
 	const name = 'My Social Networks';
 	const locale = 'my-social-networks-locale';
-	const slug = 'my-social-network';
+	const slug = 'my-social-networks-master';
 	
 	/*--------------------------------------------------*/
 	/* Constructor
