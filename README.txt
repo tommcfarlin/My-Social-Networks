@@ -11,7 +11,7 @@ A simple WordPress widget for sharing a few of your social networks.
 
 This widget is used to demonstrate the <a href="http://github.com/tommcfarlin/WordPress-Widget-Boilerplate">WordPress Widget Boilerplate</a>.
 
-It was also used in the WpTuts article <a href="javascript:;">Writing Maintainable WordPress Widgets</a>.
+It was also used in the WpTuts article <a href="http://wp.tutsplus.com/tutorials/widgets/writing-maintainable-wordpress-widgets-part-1-of-2/">Writing Maintainable WordPress Widgets</a>.
 
 == Installation ==
 
