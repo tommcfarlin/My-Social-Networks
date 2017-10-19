@@ -41,7 +41,7 @@ class My_Social_Network extends WP_Widget {
 	 * the widget, loads localization files, and includes necessary scripts and
 	 * styles.
 	 */
-	function My_Social_Network() {
+	function __construct() {
 
 		load_plugin_textdomain(self::locale, false, dirname(plugin_basename( __FILE__ ) ) . '/lang/' );
 
@@ -50,7 +50,7 @@ class My_Social_Network extends WP_Widget {
 			'description' => __('A simple WordPress widget for sharing a few of your social networks.', self::locale)
 		);	
 		
-		$this->WP_Widget(self::slug, __(self::name, self::locale), $widget_opts);
+		parent::__construct(self::slug, __(self::name, self::locale), $widget_opts);
 
     	// Load JavaScript and stylesheets
     	$this->register_scripts_and_styles();
